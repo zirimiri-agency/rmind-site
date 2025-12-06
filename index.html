@@ -5,8 +5,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>RMind - Quick capture for your mind</title>
   <meta name="description" content="A minimalist app for capturing thoughts, places, people, and ideas before you forget them.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.6;
@@ -14,305 +18,257 @@
       background: #fafafa;
     }
 
-    /* Hero Section */
+    /* Hero */
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 2rem;
+      padding: 4rem 2rem;
       text-align: center;
-      background: linear-gradient(180deg, #fafafa 0%, #f0f0f0 100%);
     }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
     .logo {
-      width: 120px;
-      height: 120px;
-      border-radius: 24px;
-      margin-bottom: 1.5rem;
-      box-shadow: 4px 4px 0px 0px rgba(0,0,0,0.2);
+      width: 64px;
+      height: 64px;
+      border-radius: 14px;
+      box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.15);
     }
+
     h1 {
-      font-size: 3.5rem;
+      font-size: 2.5rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
-      margin-bottom: 0.5rem;
     }
+
     .tagline {
-      font-size: 1rem;
+      font-size: 0.8rem;
       font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #666;
-      margin-bottom: 1.5rem;
-    }
-    .description {
-      max-width: 500px;
-      color: #333;
-      margin-bottom: 2rem;
-      font-size: 1.1rem;
-    }
-    .app-store-badge {
-      height: 54px;
-      transition: transform 0.2s;
-    }
-    .app-store-badge:hover {
-      transform: scale(1.05);
-    }
-    .coming-soon {
-      display: inline-block;
-      padding: 0.75rem 2rem;
-      background: #0d0d0d;
-      color: #fff;
-      font-size: 0.875rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      border: none;
-    }
-
-    /* Features Section */
-    .features {
-      padding: 5rem 2rem;
-      background: #fff;
-    }
-    .features-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-    .section-title {
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: #999;
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 2.5rem;
-    }
-    .feature {
-      text-align: center;
-      padding: 1.5rem;
-    }
-    .feature-icon {
-      width: 48px;
-      height: 48px;
-      margin-bottom: 1rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .feature h3 {
-      font-size: 1.25rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.02em;
-      margin-bottom: 0.5rem;
-    }
-    .feature p {
-      color: #666;
-      font-size: 0.95rem;
+      color: #888;
+      margin-bottom: 2rem;
     }
 
-    /* Screenshots Section */
-    .screenshots {
-      padding: 5rem 2rem;
+    .description {
+      max-width: 420px;
+      color: #444;
+      font-size: 1.1rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .cta {
+      display: inline-block;
+      padding: 1rem 2.5rem;
       background: #0d0d0d;
       color: #fff;
-      overflow: hidden;
-    }
-    .screenshots .section-title {
-      color: #666;
-    }
-    .screenshots-scroll {
-      display: flex;
-      gap: 1.5rem;
-      justify-content: center;
-      flex-wrap: wrap;
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-    .screenshot {
-      width: 220px;
-      border-radius: 24px;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      transition: transform 0.3s;
-    }
-    .screenshot:hover {
-      transform: translateY(-10px);
-    }
-
-    /* Categories Section */
-    .categories {
-      padding: 5rem 2rem;
-      background: #fafafa;
-    }
-    .categories-container {
-      max-width: 800px;
-      margin: 0 auto;
-    }
-    .category-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-    .category-chip {
-      padding: 0.5rem 1.25rem;
       font-size: 0.8rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.05em;
-      border: 2px solid #0d0d0d;
+      letter-spacing: 0.1em;
+      text-decoration: none;
+      transition: background 0.2s;
     }
-    .category-chip.people { background: #FFE5E5; }
-    .category-chip.places { background: #E5F0FF; }
-    .category-chip.ideas { background: #FFF9E5; }
-    .category-chip.things { background: #E5FFE5; }
-    .category-chip.media { background: #F5E5FF; }
-    .category-chip.tasks { background: #FFE5F5; }
-    .category-chip.reminders { background: #E5FFFF; }
+
+    .cta:hover {
+      background: #333;
+    }
+
+    /* Screenshots */
+    .screenshots {
+      display: flex;
+      gap: 1.25rem;
+      justify-content: center;
+      padding: 3rem 1rem 5rem;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .screenshot {
+      width: 200px;
+      flex-shrink: 0;
+      border-radius: 20px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.12);
+      transition: transform 0.3s ease;
+    }
+
+    .screenshot:hover {
+      transform: translateY(-8px);
+    }
+
+    /* Features */
+    .features {
+      background: #0d0d0d;
+      color: #fff;
+      padding: 5rem 2rem;
+    }
+
+    .features-inner {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3rem;
+    }
+
+    .feature {
+      text-align: center;
+    }
+
+    .feature h3 {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .feature p {
+      font-size: 0.9rem;
+      color: #999;
+      line-height: 1.5;
+    }
 
     /* Footer */
     footer {
       padding: 3rem 2rem;
-      background: #fff;
       text-align: center;
-      border-top: 2px solid #eee;
+      border-top: 1px solid #eee;
     }
+
     .footer-links {
       display: flex;
       gap: 2rem;
       justify-content: center;
-      font-size: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-links a {
+      font-size: 0.7rem;
+      font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.1em;
-      margin-bottom: 1.5rem;
-    }
-    .footer-links a {
-      color: #666;
+      color: #888;
       text-decoration: none;
     }
+
     .footer-links a:hover {
       color: #0d0d0d;
     }
+
     .contact {
       font-size: 0.75rem;
-      color: #999;
-    }
-    .contact a {
-      color: #666;
+      color: #aaa;
     }
 
-    @media (max-width: 640px) {
-      h1 { font-size: 2.5rem; }
-      .screenshot { width: 180px; }
-      .features-grid { gap: 1.5rem; }
+    .contact a {
+      color: #888;
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      color: #0d0d0d;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .features-inner {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .screenshot {
+        width: 160px;
+      }
+
+      h1 {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand {
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+
+      .screenshot {
+        width: 140px;
+      }
+
+      .screenshots {
+        gap: 0.75rem;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Hero -->
   <section class="hero">
-    <img src="logo.png" alt="RMind" class="logo">
-    <h1>RMind</h1>
+    <div class="brand">
+      <img src="logo.png" alt="RMind" class="logo">
+      <h1>RMind</h1>
+    </div>
     <p class="tagline">Quick capture for your mind</p>
     <p class="description">
       Stop losing brilliant ideas, interesting people, and must-visit places.
-      RMind lets you capture fleeting thoughts in seconds, organized and ready
-      when you need them.
+      Capture fleeting thoughts in seconds, organized and ready when you need them.
     </p>
-    <span class="coming-soon">Coming Soon to App Store</span>
-    <!-- Uncomment when app is live
-    <a href="https://apps.apple.com/app/rmind/id000000000">
-      <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" class="app-store-badge">
-    </a>
-    -->
+    <span class="cta">Coming Soon</span>
   </section>
 
-  <!-- Features -->
+  <div class="screenshots">
+    <img src="screenshots/capture.png" alt="Quick Capture" class="screenshot">
+    <img src="screenshots/home.png" alt="Your Memories" class="screenshot">
+    <img src="screenshots/map.png" alt="Map View" class="screenshot">
+    <img src="screenshots/widget.png" alt="Widget" class="screenshot">
+  </div>
+
   <section class="features">
-    <div class="features-container">
-      <p class="section-title">Why RMind</p>
-      <div class="features-grid">
-        <div class="feature">
-          <div class="feature-icon">&#9889;</div>
-          <h3>Instant Capture</h3>
-          <p>Open, type, done. No friction, no folders to navigate, no decisions to make in the moment.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#128205;</div>
-          <h3>Location Aware</h3>
-          <p>Attach places to your memories. Remember not just what, but where you discovered it.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#128276;</div>
-          <h3>Smart Reminders</h3>
-          <p>Set reminders on any entry. Never forget to follow up on that idea or reach out to that person.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#127912;</div>
-          <h3>Organized by Design</h3>
-          <p>Color-coded categories keep everything tidy. People, places, ideas, tasks, and more.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#128270;</div>
-          <h3>Find Anything</h3>
-          <p>Powerful search and filters. Find that restaurant someone mentioned months ago in seconds.</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">&#128274;</div>
-          <h3>Private & Secure</h3>
-          <p>Your thoughts are yours. Secure authentication keeps your captures private.</p>
-        </div>
+    <div class="features-inner">
+      <div class="feature">
+        <h3>Instant Capture</h3>
+        <p>Open, type, done. No friction, no folders to navigate.</p>
+      </div>
+      <div class="feature">
+        <h3>Location Aware</h3>
+        <p>Attach places to memories. Remember where you discovered things.</p>
+      </div>
+      <div class="feature">
+        <h3>Smart Reminders</h3>
+        <p>Set reminders on any entry. Never forget to follow up.</p>
+      </div>
+      <div class="feature">
+        <h3>Organized</h3>
+        <p>Color-coded categories keep everything tidy automatically.</p>
+      </div>
+      <div class="feature">
+        <h3>Find Anything</h3>
+        <p>Powerful search and filters. Find anything in seconds.</p>
+      </div>
+      <div class="feature">
+        <h3>Private</h3>
+        <p>Your thoughts are yours. Secure authentication included.</p>
       </div>
     </div>
   </section>
 
-  <!-- Screenshots -->
-  <section class="screenshots">
-    <p class="section-title">See It In Action</p>
-    <div class="screenshots-scroll">
-      <img src="screenshots/capture.png" alt="Quick Capture" class="screenshot">
-      <img src="screenshots/home.png" alt="Your Memories" class="screenshot">
-      <img src="screenshots/map.png" alt="Map View" class="screenshot">
-      <img src="screenshots/widget.png" alt="Home Screen Widget" class="screenshot">
-    </div>
-  </section>
-
-  <!-- Categories -->
-  <section class="categories">
-    <div class="categories-container">
-      <p class="section-title">Capture Everything</p>
-      <div class="category-list">
-        <span class="category-chip people">People</span>
-        <span class="category-chip places">Places</span>
-        <span class="category-chip ideas">Ideas</span>
-        <span class="category-chip things">Things</span>
-        <span class="category-chip media">Media</span>
-        <span class="category-chip tasks">Tasks</span>
-        <span class="category-chip reminders">Reminders</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
   <footer>
     <div class="footer-links">
-      <a href="privacy.html">Privacy Policy</a>
-      <a href="terms.html">Terms of Service</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
     </div>
     <p class="contact">
-      Contact: <a href="mailto:contact@rmind.app">contact@rmind.app</a>
+      <a href="mailto:contact@rmind.app">contact@rmind.app</a>
     </p>
   </footer>
 </body>
