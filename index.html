@@ -13,6 +13,19 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
+    :root {
+      --color-person: #1A75FF;
+      --color-place: #2E9E52;
+      --color-eats: #FF8C1A;
+      --color-purchase: #9933FF;
+      --color-book: #E6C200;
+      --color-movie: #E6385E;
+      --color-idea: #1A9E8C;
+      --color-event: #6633FF;
+      --color-gift: #E639B0;
+      --color-reminder: #00A3CC;
+    }
+
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
       line-height: 1.5;
@@ -20,18 +33,24 @@
       background: #fafafa;
     }
 
-    /* Bauhaus color bar */
+    /* Color bars */
     .color-bar {
       display: flex;
       height: 8px;
     }
     .color-bar div { flex: 1; }
-    .color-bar .red { background: hsl(350, 85%, 55%); }
-    .color-bar .yellow { background: hsl(48, 95%, 50%); }
-    .color-bar .blue { background: hsl(215, 90%, 50%); }
-    .color-bar .orange { background: hsl(25, 95%, 55%); }
-    .color-bar .teal { background: hsl(170, 70%, 45%); }
-    .color-bar .purple { background: hsl(270, 70%, 55%); }
+    .color-bar .red { background: var(--color-movie); }
+    .color-bar .yellow { background: var(--color-book); }
+    .color-bar .blue { background: var(--color-person); }
+    .color-bar .orange { background: var(--color-eats); }
+    .color-bar .teal { background: var(--color-idea); }
+    .color-bar .purple { background: var(--color-purchase); }
+
+    .color-bar-thin {
+      display: flex;
+      height: 4px;
+    }
+    .color-bar-thin div { flex: 1; }
 
     /* Header */
     header {
@@ -71,28 +90,28 @@
     .cta {
       display: inline-block;
       padding: 0.6rem 1.25rem;
-      background: #0d0d0d;
+      background: linear-gradient(135deg, var(--color-person), var(--color-purchase));
       color: #fff;
       font-size: 0.7rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.08em;
       text-decoration: none;
-      border: 2px solid #0d0d0d;
-      box-shadow: 3px 3px 0px 0px rgba(0,0,0,1);
+      border: none;
+      box-shadow: 3px 3px 0px 0px rgba(0,0,0,0.3);
       transition: all 0.15s;
     }
 
     .cta:hover {
       transform: translate(1px, 1px);
-      box-shadow: 2px 2px 0px 0px rgba(0,0,0,1);
+      box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.3);
     }
 
     /* Hero */
     .hero {
       padding: 3rem 2rem;
-      background: #fff;
-      border-bottom: 1px solid #eee;
+      background: linear-gradient(135deg, #fff 0%, #f8f9ff 50%, #fff8f8 100%);
+      border-bottom: none;
     }
 
     .hero-inner {
@@ -109,7 +128,7 @@
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.2em;
-      color: #888;
+      color: var(--color-idea);
       margin-bottom: 0.75rem;
     }
 
@@ -118,6 +137,10 @@
       font-weight: 800;
       line-height: 1.2;
       margin-bottom: 1rem;
+      background: linear-gradient(135deg, var(--color-movie) 0%, var(--color-purchase) 50%, var(--color-person) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     .hero-text p {
@@ -135,13 +158,22 @@
     .hero-screenshots img {
       width: 140px;
       border-radius: 16px;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+      border: 3px solid #0d0d0d;
+    }
+
+    .hero-screenshots img:first-child {
+      border-color: var(--color-eats);
+    }
+
+    .hero-screenshots img:last-child {
+      border-color: var(--color-person);
     }
 
     /* Features */
     .features {
       padding: 3rem 2rem;
-      border-bottom: 1px solid #eee;
+      background: #fff;
     }
 
     .features-inner {
@@ -164,6 +196,28 @@
       gap: 2rem;
     }
 
+    .feature {
+      position: relative;
+      padding-left: 1rem;
+    }
+
+    .feature::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 4px;
+      border-radius: 2px;
+    }
+
+    .feature:nth-child(1)::before { background: var(--color-eats); }
+    .feature:nth-child(2)::before { background: var(--color-place); }
+    .feature:nth-child(3)::before { background: var(--color-reminder); }
+    .feature:nth-child(4)::before { background: var(--color-purchase); }
+    .feature:nth-child(5)::before { background: var(--color-person); }
+    .feature:nth-child(6)::before { background: var(--color-movie); }
+
     .feature h3 {
       font-size: 0.75rem;
       font-weight: 700;
@@ -181,8 +235,7 @@
     /* Categories */
     .categories {
       padding: 2.5rem 2rem;
-      background: #fff;
-      border-bottom: 1px solid #eee;
+      background: linear-gradient(180deg, #fafafa 0%, #fff 100%);
     }
 
     .categories-inner {
@@ -197,18 +250,20 @@
     }
 
     .chip {
-      padding: 0.4rem 0.75rem;
+      padding: 0.5rem 0.85rem;
       font-size: 0.65rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.05em;
-      border: 2px solid #0d0d0d;
+      border: none;
+      color: #fff;
+      box-shadow: 2px 2px 0px 0px rgba(0,0,0,0.2);
     }
 
     /* More Screenshots */
     .more-screenshots {
       padding: 3rem 2rem;
-      border-bottom: 1px solid #eee;
+      background: #fff;
     }
 
     .more-screenshots-inner {
@@ -229,12 +284,19 @@
       flex-shrink: 0;
       border-radius: 16px;
       box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      border: 3px solid #0d0d0d;
     }
+
+    .screenshots-row img:nth-child(1) { border-color: var(--color-eats); }
+    .screenshots-row img:nth-child(2) { border-color: var(--color-person); }
+    .screenshots-row img:nth-child(3) { border-color: var(--color-place); }
+    .screenshots-row img:nth-child(4) { border-color: var(--color-purchase); }
 
     /* Footer */
     footer {
       padding: 2rem;
       text-align: center;
+      background: #fafafa;
     }
 
     .footer-links {
@@ -254,7 +316,7 @@
     }
 
     .footer-links a:hover {
-      color: #0d0d0d;
+      color: var(--color-person);
     }
 
     .contact {
@@ -265,6 +327,10 @@
     .contact a {
       color: #888;
       text-decoration: none;
+    }
+
+    .contact a:hover {
+      color: var(--color-person);
     }
 
     .made-by {
@@ -279,7 +345,7 @@
     }
 
     .made-by a:hover {
-      color: #666;
+      color: var(--color-idea);
     }
 
     /* Responsive */
@@ -287,6 +353,10 @@
       .hero-inner {
         grid-template-columns: 1fr;
         text-align: center;
+      }
+
+      .hero-text h2 {
+        font-size: 1.75rem;
       }
 
       .hero-text p {
@@ -340,6 +410,12 @@
     </div>
   </section>
 
+  <div class="color-bar-thin">
+    <div style="background: var(--color-place);"></div>
+    <div style="background: var(--color-idea);"></div>
+    <div style="background: var(--color-reminder);"></div>
+  </div>
+
   <section class="features">
     <div class="features-inner">
       <p class="section-label">Features</p>
@@ -372,23 +448,35 @@
     </div>
   </section>
 
+  <div class="color-bar-thin">
+    <div style="background: var(--color-movie);"></div>
+    <div style="background: var(--color-book);"></div>
+    <div style="background: var(--color-gift);"></div>
+  </div>
+
   <section class="categories">
     <div class="categories-inner">
       <p class="section-label">Capture Everything</p>
       <div class="category-chips">
-        <span class="chip" style="background: #FFE5E5;">People</span>
-        <span class="chip" style="background: #E5F0FF;">Places</span>
-        <span class="chip" style="background: #FFEAD5;">Eats & Drinks</span>
-        <span class="chip" style="background: #F0E5FF;">Purchases</span>
-        <span class="chip" style="background: #FFF3D5;">Books</span>
-        <span class="chip" style="background: #FFE5F0;">Movies/Shows</span>
-        <span class="chip" style="background: #E5FFF0;">Ideas</span>
-        <span class="chip" style="background: #E5E5FF;">Events</span>
-        <span class="chip" style="background: #FFE5FF;">Gift Ideas</span>
-        <span class="chip" style="background: #E5FFFF;">Reminders</span>
+        <span class="chip" style="background: var(--color-person);">People</span>
+        <span class="chip" style="background: var(--color-place);">Places</span>
+        <span class="chip" style="background: var(--color-eats);">Eats & Drinks</span>
+        <span class="chip" style="background: var(--color-purchase);">Purchases</span>
+        <span class="chip" style="background: var(--color-book); color: #0d0d0d;">Books</span>
+        <span class="chip" style="background: var(--color-movie);">Movies/Shows</span>
+        <span class="chip" style="background: var(--color-idea);">Ideas</span>
+        <span class="chip" style="background: var(--color-event);">Events</span>
+        <span class="chip" style="background: var(--color-gift);">Gift Ideas</span>
+        <span class="chip" style="background: var(--color-reminder);">Reminders</span>
       </div>
     </div>
   </section>
+
+  <div class="color-bar-thin">
+    <div style="background: var(--color-person);"></div>
+    <div style="background: var(--color-eats);"></div>
+    <div style="background: var(--color-event);"></div>
+  </div>
 
   <section class="more-screenshots">
     <div class="more-screenshots-inner">
