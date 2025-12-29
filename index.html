@@ -194,35 +194,56 @@
     /* Categories Section */
     .categories {
       padding: 6rem 2rem;
-      background: #1a1a1a;
-      color: #fff;
+      background: #f8f8f8;
     }
 
-    .categories .section-label {
-      color: #666;
-    }
-
-    .categories .section-title {
-      color: #fff;
-    }
-
-    .category-visual {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.5rem;
-      justify-content: center;
-      max-width: 600px;
+    .categories-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+      max-width: 1000px;
       margin: 0 auto;
     }
 
-    .category-dot {
-      width: 48px;
-      height: 48px;
-      border-radius: 10px;
-      transition: transform 0.2s;
+    .category-card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-    .category-dot:hover {
-      transform: scale(1.1);
+    .category-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    }
+
+    .category-color {
+      width: 8px;
+      min-height: 100%;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+
+    .category-content {
+      flex: 1;
+    }
+
+    .category-name {
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #999;
+      margin-bottom: 0.5rem;
+    }
+
+    .category-example {
+      font-size: 0.95rem;
+      color: #333;
+      line-height: 1.5;
     }
 
     /* Footer */
@@ -273,12 +294,14 @@
       .section-title { font-size: 1.5rem; }
       .screenshot { width: 180px; border-radius: 20px; }
       .features-grid { gap: 2rem; }
-      .category-dot { width: 40px; height: 40px; border-radius: 8px; }
+      .categories-grid { gap: 1rem; }
     }
 
     @media (max-width: 480px) {
       .screenshot { width: 150px; border-radius: 16px; }
       .screenshots-grid { gap: 1rem; }
+      .category-card { padding: 1rem; }
+      .category-example { font-size: 0.9rem; }
     }
   </style>
 </head>
@@ -357,21 +380,80 @@
   <!-- Categories -->
   <section class="categories">
     <div class="section-header">
-      <p class="section-label">Categories</p>
-      <h2 class="section-title">A color for everything</h2>
+      <p class="section-label">What will you remember?</p>
+      <h2 class="section-title">A category for every moment</h2>
     </div>
-    <div class="category-visual">
-      <div class="category-dot" style="background: #4A90D9;" title="Person"></div>
-      <div class="category-dot" style="background: #2ECC71;" title="Place"></div>
-      <div class="category-dot" style="background: #F39C12;" title="Eats & Drinks"></div>
-      <div class="category-dot" style="background: #9B59B6;" title="Purchase"></div>
-      <div class="category-dot" style="background: #F1C40F;" title="Book"></div>
-      <div class="category-dot" style="background: #E74C3C;" title="Movie/Show"></div>
-      <div class="category-dot" style="background: #1ABC9C;" title="Idea"></div>
-      <div class="category-dot" style="background: #8E44AD;" title="Event"></div>
-      <div class="category-dot" style="background: #E91E8B;" title="Gift"></div>
-      <div class="category-dot" style="background: #7F8C8D;" title="Reminder"></div>
-      <div class="category-dot" style="background: #95A5A6;" title="Other"></div>
+    <div class="categories-grid">
+      <div class="category-card">
+        <div class="category-color" style="background: #4A90D9;"></div>
+        <div class="category-content">
+          <p class="category-name">Person</p>
+          <p class="category-example">Met Sarah at the conference — works at Google, interested in AI, loves hiking</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #2ECC71;"></div>
+        <div class="category-content">
+          <p class="category-name">Place</p>
+          <p class="category-example">Hidden beach cove off Highway 1 — park at mile marker 42, short trail down</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #F39C12;"></div>
+        <div class="category-content">
+          <p class="category-name">Eats & Drinks</p>
+          <p class="category-example">Destroyer in Culver City — incredible coffee, try the seasonal toast</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #9B59B6;"></div>
+        <div class="category-content">
+          <p class="category-name">Purchase</p>
+          <p class="category-example">Allbirds Tree Runners — size 10, grey, most comfortable shoes I've owned</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #F1C40F;"></div>
+        <div class="category-content">
+          <p class="category-name">Book</p>
+          <p class="category-example">Thinking, Fast and Slow — recommended on that podcast, about decision making</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #E74C3C;"></div>
+        <div class="category-content">
+          <p class="category-name">Movie / Show</p>
+          <p class="category-example">Fallout Season 2 on Prime — post-apocalyptic vibes, Walton Goggins is amazing</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #1ABC9C;"></div>
+        <div class="category-content">
+          <p class="category-name">Idea</p>
+          <p class="category-example">App that tracks water intake with plant growth visualization — gamifies hydration</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #8E44AD;"></div>
+        <div class="category-content">
+          <p class="category-name">Event</p>
+          <p class="category-example">Nine Inch Nails at Honda Center — March 10, buy tickets when they drop Friday</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #E91E8B;"></div>
+        <div class="category-content">
+          <p class="category-name">Gift Idea</p>
+          <p class="category-example">Mom wants a KitchenAid mixer — red, artisan series, check Costco first</p>
+        </div>
+      </div>
+      <div class="category-card">
+        <div class="category-color" style="background: #7F8C8D;"></div>
+        <div class="category-content">
+          <p class="category-name">Reminder</p>
+          <p class="category-example">Call dentist to reschedule cleaning — they close at 5pm</p>
+        </div>
+      </div>
     </div>
   </section>
 
