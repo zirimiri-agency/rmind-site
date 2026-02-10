@@ -346,7 +346,14 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+    }
+    .category-tile-face svg {
+      width: 24px;
+      height: 24px;
+      fill: #fff;
+    }
+    .category-tile-face.dark-icon svg {
+      fill: #0D0D0D;
     }
     .category-tile-label {
       font-size: 9px;
@@ -399,7 +406,13 @@
       gap: 8px;
     }
     .feature-card-bar-emoji {
-      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+    .feature-card-bar-emoji svg {
+      width: 16px;
+      height: 16px;
+      fill: #fff;
     }
     .feature-card-bar-label {
       font-size: 10px;
@@ -734,84 +747,84 @@
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #0D5ECC;">&#x1F64B;</div>
+            <div class="category-tile-face" style="background: #0D5ECC;"><svg viewBox="0 0 24 24"><path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/></svg></div>
           </div>
           <div class="category-tile-label">Person</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #1E9954;">&#x1F4CD;</div>
+            <div class="category-tile-face" style="background: #1E9954;"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg></div>
           </div>
           <div class="category-tile-label">Place</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #F57D05;">&#x1F37D;&#xFE0F;</div>
+            <div class="category-tile-face" style="background: #F57D05;"><svg viewBox="0 0 24 24"><path d="M7 3v5c0 1.9 1.2 3.5 3 4.1V21h4v-8.9c1.8-.6 3-2.2 3-4.1V3h-2v5h-2V3h-2v5h-2V3H7z"/></svg></div>
           </div>
           <div class="category-tile-label">Restaurant</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #9933CC;">&#x1F6D2;</div>
+            <div class="category-tile-face" style="background: #9933CC;"><svg viewBox="0 0 24 24"><path d="M18 6h-2V4c0-1.1-.9-2-2-2h-4c-1.1 0-2 .9-2 2v2H6c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm-6-2h2v2h-2V4zM6 19V8h12v11H6z"/></svg></div>
           </div>
           <div class="category-tile-label">Purchase</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #F5C703;">&#x1F4D6;</div>
+            <div class="category-tile-face dark-icon" style="background: #F5C703;"><svg viewBox="0 0 24 24"><path d="M21 4c-1.1 0-3.1.5-5 1.3V19c1.9-.8 3.9-1.3 5-1.3V4zM3 4v13.7c1.1 0 3.1.5 5 1.3V5.3C6.1 4.5 4.1 4 3 4zm5 1.3v13.4c1.5-.5 3.2-.8 4-.8s2.5.3 4 .8V5.3c-1.5-.5-3.2-.8-4-.8s-2.5.3-4 .8z"/></svg></div>
           </div>
           <div class="category-tile-label">Book</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #E02E4D;">&#x1F3AC;</div>
+            <div class="category-tile-face" style="background: #E02E4D;"><svg viewBox="0 0 24 24"><path d="M18 4l2 4h-3l-2-4h-2l2 4h-3l-2-4H8l2 4H7L5 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4h-4z"/></svg></div>
           </div>
           <div class="category-tile-label">Movie</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #148577;">&#x1F4A1;</div>
+            <div class="category-tile-face" style="background: #148577;"><svg viewBox="0 0 24 24"><path d="M9 21c0 .5.4 1 1 1h4c.6 0 1-.5 1-1v-1H9v1zm3-19C8.1 2 5 5.1 5 9c0 2.4 1.2 4.5 3 5.7V17c0 .5.4 1 1 1h6c.6 0 1-.5 1-1v-2.3c1.8-1.2 3-3.3 3-5.7 0-3.9-3.1-7-7-7z"/></svg></div>
           </div>
           <div class="category-tile-label">Idea</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #5533E0;">&#x1F4C5;</div>
+            <div class="category-tile-face" style="background: #5533E0;"><svg viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11z"/></svg></div>
           </div>
           <div class="category-tile-label">Event</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #E02E8F;">&#x1F381;</div>
+            <div class="category-tile-face" style="background: #E02E8F;"><svg viewBox="0 0 24 24"><path d="M20 6h-2.2c.1-.3.2-.6.2-1 0-1.7-1.3-3-3-3-1 0-1.8.5-2.3 1.2L12 4.3l-.7-1.1C10.8 2.5 10 2 9 2 7.3 2 6 3.3 6 5c0 .4.1.7.2 1H4c-1.1 0-2 .9-2 2v3c0 .6.4 1 1 1h7V8h4v4h7c.6 0 1-.4 1-1V8c0-1.1-.9-2-2-2zm-5-2c.6 0 1 .4 1 1s-.4 1-1 1h-2l1.2-1.7c.2-.2.5-.3.8-.3zM9 6c-.6 0-1-.4-1-1s.4-1 1-1c.3 0 .6.1.8.3L11 6H9zM3 13v7c0 1.1.9 2 2 2h6v-9H3zm12 0v9h4c1.1 0 2-.9 2-2v-7h-6z"/></svg></div>
           </div>
           <div class="category-tile-label">Gift</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #1294CC;">&#x23F0;</div>
+            <div class="category-tile-face" style="background: #1294CC;"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></div>
           </div>
           <div class="category-tile-label">Reminder</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #E05945;">&#x1F4DD;</div>
+            <div class="category-tile-face" style="background: #E05945;"><svg viewBox="0 0 24 24"><path d="M3 5h2v2H3V5zm4 0h14v2H7V5zM3 9h2v2H3V9zm4 0h14v2H7V9zM3 13h2v2H3v-2zm4 0h14v2H7v-2zM3 17h2v2H3v-2zm4 0h14v2H7v-2z"/></svg></div>
           </div>
           <div class="category-tile-label">List</div>
         </div>
         <div class="category-tile">
           <div class="category-tile-icon">
             <div class="category-tile-shadow"></div>
-            <div class="category-tile-face" style="background: #F0F0F0;">&#x1F4CC;</div>
+            <div class="category-tile-face dark-icon" style="background: #F0F0F0;"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="2"/><circle cx="6" cy="8" r="2"/><circle cx="18" cy="8" r="2"/><circle cx="12" cy="14" r="2"/><circle cx="6" cy="14" r="2"/><circle cx="18" cy="14" r="2"/></svg></div>
           </div>
           <div class="category-tile-label">Other</div>
         </div>
@@ -837,7 +850,7 @@
       <div class="features-list">
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #1E9954;">
-            <span class="feature-card-bar-emoji">&#x270F;&#xFE0F;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M3 17.3V21h3.7L17.8 9.9l-3.7-3.7L3 17.3zM20.7 7c.4-.4.4-1 0-1.4l-2.3-2.3c-.4-.4-1-.4-1.4 0l-1.8 1.8 3.7 3.7L20.7 7z"/></svg></span>
             <span class="feature-card-bar-label">Capture</span>
           </div>
           <div class="feature-card-body">
@@ -848,7 +861,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #E05945;">
-            <span class="feature-card-bar-emoji">&#x1F4DD;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M3 5h2v2H3V5zm4 0h14v2H7V5zM3 9h2v2H3V9zm4 0h14v2H7V9zM3 13h2v2H3v-2zm4 0h14v2H7v-2zM3 17h2v2H3v-2zm4 0h14v2H7v-2z"/></svg></span>
             <span class="feature-card-bar-label">Lists</span>
           </div>
           <div class="feature-card-body">
@@ -859,7 +872,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #1294CC;">
-            <span class="feature-card-bar-emoji">&#x23F0;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.9 2 2 2zm6-6v-5c0-3.1-1.6-5.6-4.5-6.3V4c0-.8-.7-1.5-1.5-1.5s-1.5.7-1.5 1.5v.7C7.6 5.4 6 7.9 6 11v5l-2 2v1h16v-1l-2-2z"/></svg></span>
             <span class="feature-card-bar-label">Reminders</span>
           </div>
           <div class="feature-card-body">
@@ -870,7 +883,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #0D5ECC;">
-            <span class="feature-card-bar-emoji">&#x1F465;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M16 11c1.7 0 3-1.3 3-3s-1.3-3-3-3-3 1.3-3 3 1.3 3 3 3zm-8 0c1.7 0 3-1.3 3-3S9.7 5 8 5 5 6.3 5 8s1.3 3 3 3zm0 2c-2.3 0-7 1.2-7 3.5V19h14v-2.5c0-2.3-4.7-3.5-7-3.5zm8 0c-.3 0-.6 0-1 .1 1.2.8 2 2 2 3.4V19h6v-2.5c0-2.3-4.7-3.5-7-3.5z"/></svg></span>
             <span class="feature-card-bar-label">Social</span>
           </div>
           <div class="feature-card-body">
@@ -881,7 +894,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #148577;">
-            <span class="feature-card-bar-emoji">&#x1F5FA;&#xFE0F;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M12 2C8.1 2 5 5.1 5 9c0 5.2 7 13 7 13s7-7.8 7-13c0-3.9-3.1-7-7-7zm0 9.5c-1.4 0-2.5-1.1-2.5-2.5S10.6 6.5 12 6.5s2.5 1.1 2.5 2.5S13.4 11.5 12 11.5z"/></svg></span>
             <span class="feature-card-bar-label">Map</span>
           </div>
           <div class="feature-card-body">
@@ -892,7 +905,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #9933CC;">
-            <span class="feature-card-bar-emoji">&#x2728;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M7 5h10v2H7V5zm0 4h10v2H7V9zm0 4h7v2H7v-2z" opacity=".6"/><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/></svg></span>
             <span class="feature-card-bar-label">Fields</span>
           </div>
           <div class="feature-card-body">
@@ -903,7 +916,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #5533E0;">
-            <span class="feature-card-bar-emoji">&#x1F4F1;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M4 8h4V4H4v4zm6 12h4v-4h-4v4zm-6 0h4v-4H4v4zm0-6h4v-4H4v4zm6 0h4v-4h-4v4zm6-10v4h4V4h-4zm-6 4h4V4h-4v4zm6 6h4v-4h-4v4zm0 6h4v-4h-4v4z"/></svg></span>
             <span class="feature-card-bar-label">Widgets</span>
           </div>
           <div class="feature-card-body">
@@ -914,7 +927,7 @@
 
         <div class="feature-card">
           <div class="feature-card-bar" style="background: #E02E4D;">
-            <span class="feature-card-bar-emoji">&#x1F50D;</span>
+            <span class="feature-card-bar-emoji"><svg viewBox="0 0 24 24"><path d="M15.5 14h-.8l-.3-.3c1-1.1 1.6-2.6 1.6-4.2C16 5.9 13.1 3 9.5 3S3 5.9 3 9.5 5.9 16 9.5 16c1.6 0 3.1-.6 4.2-1.6l.3.3v.8l5 5L20.5 19l-5-5zm-6 0C7 14 5 12 5 9.5S7 5 9.5 5 14 7 14 9.5 12 14 9.5 14z"/></svg></span>
             <span class="feature-card-bar-label">Search</span>
           </div>
           <div class="feature-card-body">
