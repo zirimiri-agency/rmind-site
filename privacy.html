@@ -7,7 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
       color: #0d0d0d;
       background: #fafafa;
@@ -15,9 +15,34 @@
       max-width: 800px;
       margin: 0 auto;
     }
+    .bauhaus-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      display: flex;
+      z-index: 1000;
+    }
+    .bauhaus-bar span { flex: 1; }
+    .bauhaus-bar span:nth-child(1) { background: #E02E4D; }
+    .bauhaus-bar span:nth-child(2) { background: #F5C703; }
+    .bauhaus-bar span:nth-child(3) { background: #0D5ECC; }
+    .back-link {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      margin-top: 1rem;
+    }
+    .back-link:hover { color: #0d0d0d; }
     h1 {
       font-size: 2rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
@@ -48,8 +73,12 @@
   </style>
 </head>
 <body>
+  <div class="bauhaus-bar"><span></span><span></span><span></span></div>
+
+  <a href="/" class="back-link">&larr; Back to RMind</a>
+
   <h1>Privacy Policy</h1>
-  <p class="updated">Last updated: December 2024</p>
+  <p class="updated">Last updated: February 2025</p>
 
   <p>RMind ("we", "our", or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our mobile application.</p>
 
@@ -59,6 +88,10 @@
     <li><strong>Account Information:</strong> Email address and display name when you sign in with Google or Apple.</li>
     <li><strong>User Content:</strong> The entries you create are stored securely to sync across your devices. We never access, analyze, or share your content.</li>
     <li><strong>Location Data:</strong> Optional location information you choose to attach to entries.</li>
+    <li><strong>Photos:</strong> Optional photos you choose to attach to entries, stored securely in Firebase Storage.</li>
+    <li><strong>Friends Data:</strong> Email addresses used to search for friends, invite codes, and your friend list. Friend connections are stored to enable social features.</li>
+    <li><strong>Shared Content:</strong> When you share an entry, a snapshot copy is created for the recipient. Share links and associated entry snapshots are stored to enable link-based sharing.</li>
+    <li><strong>Searchable Email:</strong> A lowercase version of your email is stored to enable friend search functionality.</li>
   </ul>
 
   <h2>How We Use Your Information</h2>
@@ -67,13 +100,25 @@
     <li>Provide and maintain the RMind service</li>
     <li>Sync your entries across devices</li>
     <li>Authenticate your account</li>
+    <li>Enable social features (friend connections, entry sharing)</li>
+    <li>Generate invite codes for friend discovery</li>
+    <li>Send local notifications for reminders and friend requests</li>
   </ul>
 
   <h2>Data Storage</h2>
-  <p>Your data is stored securely using Google Firebase services. We do not sell, trade, or share your personal information with third parties for marketing purposes.</p>
+  <p>Your data is stored securely using Google Firebase services (Authentication, Firestore, and Storage). We do not sell, trade, or share your personal information with third parties for marketing purposes.</p>
+
+  <h2>Third-Party Services</h2>
+  <p>RMind uses the following third-party services:</p>
+  <ul>
+    <li><strong>Firebase (Google):</strong> Authentication, database, and file storage</li>
+    <li><strong>Google Places API:</strong> Location search when attaching places to entries</li>
+    <li><strong>Apple Sign In:</strong> Authentication via Apple ID</li>
+    <li><strong>Google Sign In:</strong> Authentication via Google account</li>
+  </ul>
 
   <h2>Data Retention</h2>
-  <p>We retain your data for as long as your account is active. You can delete your account and all associated data at any time through the app settings.</p>
+  <p>We retain your data for as long as your account is active. Deleted entries are moved to Recently Deleted for 30 days before permanent removal. You can delete your account and all associated data at any time through the app settings.</p>
 
   <h2>Your Rights</h2>
   <p>You have the right to:</p>
@@ -81,6 +126,8 @@
     <li>Access your personal data</li>
     <li>Delete your account and all data</li>
     <li>Export your data</li>
+    <li>Remove shared entries and deactivate share links</li>
+    <li>Remove friend connections at any time</li>
   </ul>
 
   <h2>Contact Us</h2>

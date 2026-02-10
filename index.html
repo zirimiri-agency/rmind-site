@@ -3,471 +3,1101 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>RMind - Quick capture for your mind</title>
-  <meta name="description" content="A minimalist app for capturing thoughts, places, people, and ideas before you forget them.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <title>RMind — Don't Forget</title>
+  <meta name="description" content="Capture memories, ideas, places, people, and more. 12 smart categories, lists, friends, sharing, and reminders. Free on iOS.">
+  <meta name="theme-color" content="#0D0D0D">
+  <meta name="apple-itunes-app" content="app-id=6756280913">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="RMind — Don't Forget">
+  <meta property="og:description" content="Capture memories, ideas, places, people, and more. 12 smart categories, lists, friends, sharing, and reminders. Free on iOS.">
+  <meta property="og:url" content="https://rmind.app">
+  <meta property="og:type" content="website">
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="RMind — Don't Forget">
+  <meta name="twitter:description" content="Capture memories, ideas, places, people, and more. 12 smart categories with smart fields.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="apple-touch-icon" href="/logo.png">
+
   <style>
+    /* ============================================
+       RESET & BASE
+       ============================================ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-      line-height: 1.6;
-      color: #1a1a1a;
-      background: #fff;
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* Hero Section */
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
+      line-height: 1.6;
+      color: #0D0D0D;
+      background: #FAFAFA;
+    }
+
+    /* ============================================
+       BAUHAUS COLOR BAR
+       ============================================ */
+    .bauhaus-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      display: flex;
+      z-index: 1000;
+    }
+    .bauhaus-bar span {
+      flex: 1;
+    }
+    .bauhaus-bar span:nth-child(1) { background: #E02E4D; }
+    .bauhaus-bar span:nth-child(2) { background: #F5C703; }
+    .bauhaus-bar span:nth-child(3) { background: #0D5ECC; }
+
+    /* ============================================
+       STICKY NAV
+       ============================================ */
+    .sticky-nav {
+      position: fixed;
+      top: 6px;
+      left: 0;
+      right: 0;
+      background: #FAFAFA;
+      border-bottom: 2px solid #0D0D0D;
+      z-index: 999;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      padding: 10px 24px;
+    }
+    .sticky-nav.visible {
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .sticky-nav-inner {
+      max-width: 640px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .sticky-nav-logo {
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #0D0D0D;
+    }
+    .sticky-nav .btn-small {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #FAFAFA;
+      background: #0D0D0D;
+      border: 2px solid #0D0D0D;
+      padding: 6px 14px;
+      position: relative;
+      display: inline-block;
+    }
+    .sticky-nav .btn-small:active {
+      transform: translate(1px, 1px);
+    }
+
+    /* ============================================
+       LAYOUT
+       ============================================ */
+    .container {
+      max-width: 640px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 60px 0;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section-alt {
+      background: #F0F0F0;
+    }
+
+    /* ============================================
+       TYPOGRAPHY
+       ============================================ */
+    .section-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: #999;
+      margin-bottom: 8px;
+    }
+
+    .section-heading {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #0D0D0D;
+      margin-bottom: 16px;
+    }
+
+    .body-text {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #444;
+    }
+
+    /* ============================================
+       BUTTONS
+       ============================================ */
+    .btn {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 14px 28px;
+      border: 2px solid #0D0D0D;
+      position: relative;
+      cursor: pointer;
+      transition: transform 0.1s, box-shadow 0.1s;
+      box-shadow: 3px 3px 0 #0D0D0D;
+    }
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0 #0D0D0D;
+    }
+    .btn-primary {
+      background: #0D0D0D;
+      color: #FAFAFA;
+    }
+    .btn-secondary {
+      background: #FAFAFA;
+      color: #0D0D0D;
+    }
+    .btn-inverted {
+      background: transparent;
+      color: #FAFAFA;
+      border-color: #FAFAFA;
+      box-shadow: 3px 3px 0 rgba(255,255,255,0.3);
+    }
+    .btn-inverted:active {
+      box-shadow: 1px 1px 0 rgba(255,255,255,0.3);
+    }
+
+    /* ============================================
+       HERO
+       ============================================ */
     .hero {
       min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 3rem 2rem;
       text-align: center;
+      padding: 80px 24px 60px;
       position: relative;
+    }
+
+    .hero-icon-wrapper {
+      position: relative;
+      margin-bottom: 32px;
+    }
+    .hero-icon-shadow {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 100px;
+      height: 100px;
+      background: #0D0D0D;
+    }
+    .hero-icon {
+      position: relative;
+      width: 100px;
+      height: 100px;
+      border: 2px solid #0D0D0D;
+      object-fit: cover;
+    }
+
+    .hero-logo {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: #0D0D0D;
+      margin-bottom: 8px;
+    }
+
+    .hero-tagline {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 24px;
+    }
+
+    .hero-description {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #444;
+      max-width: 420px;
+      margin-bottom: 32px;
+    }
+
+    .hero-cta {
+      margin-bottom: 12px;
+    }
+
+    .hero-subtext {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+    }
+
+    .hero-scroll {
+      position: absolute;
+      bottom: 24px;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #BFBFBF;
+    }
+
+    /* ============================================
+       SCREENSHOTS
+       ============================================ */
+    .screenshots-row {
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+
+    .screenshot-frame {
+      position: relative;
+    }
+    .screenshot-shadow {
+      position: absolute;
+      top: 4px;
+      left: 4px;
+      width: 100%;
+      height: 100%;
+      background: #0D0D0D;
+    }
+    .screenshot-frame img {
+      position: relative;
+      width: 150px;
+      border: 2px solid #0D0D0D;
+      display: block;
+    }
+
+    /* ============================================
+       CATEGORY GRID
+       ============================================ */
+    .category-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin: 24px 0;
+      justify-items: center;
+    }
+
+    .category-tile {
+      text-align: center;
+    }
+    .category-tile-icon {
+      position: relative;
+      display: inline-block;
+      margin-bottom: 6px;
+    }
+    .category-tile-shadow {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 56px;
+      height: 56px;
+      background: #0D0D0D;
+    }
+    .category-tile-face {
+      position: relative;
+      width: 56px;
+      height: 56px;
+      border: 2px solid #0D0D0D;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+    }
+    .category-tile-label {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0D0D0D;
+    }
+
+    .field-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      justify-content: center;
+      margin-top: 24px;
+    }
+    .field-chip {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: #0D0D0D;
+      background: #F0F0F0;
+      border: 1px solid #0D0D0D;
+      padding: 4px 10px;
+    }
+
+    /* ============================================
+       FEATURE CARDS
+       ============================================ */
+    .features-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 24px;
+    }
+
+    .feature-card {
+      background: #fff;
+      border: 2px solid #0D0D0D;
+      box-shadow: 4px 4px 0 #0D0D0D;
       overflow: hidden;
     }
 
-    /* Subtle Bauhaus accent */
-    .hero::before {
+    .feature-card-bar {
+      padding: 8px 16px;
+      border-bottom: 2px solid #0D0D0D;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .feature-card-bar-emoji {
+      font-size: 14px;
+    }
+    .feature-card-bar-label {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #fff;
+    }
+    /* Special case: yellow and light gray bars need dark text */
+    .feature-card-bar.dark-text .feature-card-bar-label {
+      color: #0D0D0D;
+    }
+
+    .feature-card-body {
+      padding: 20px;
+    }
+    .feature-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: #0D0D0D;
+      margin-bottom: 6px;
+    }
+    .feature-card-desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #444;
+    }
+    .feature-card-new {
+      display: inline-block;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #fff;
+      background: #E02E4D;
+      padding: 2px 6px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+
+    /* ============================================
+       HOW IT WORKS / TIMELINE
+       ============================================ */
+    .timeline {
+      margin-top: 24px;
+      position: relative;
+      padding-left: 52px;
+    }
+    .timeline::before {
       content: '';
       position: absolute;
+      left: 15px;
       top: 0;
-      left: 0;
-      right: 0;
-      height: 4px;
-      background: linear-gradient(90deg, #E63946 33.33%, #F4D03F 33.33%, #F4D03F 66.66%, #2E86AB 66.66%);
+      bottom: 0;
+      width: 3px;
+      background: #0D0D0D;
     }
 
-    .logo {
-      width: 100px;
-      height: 100px;
-      border-radius: 22px;
-      margin-bottom: 2rem;
-      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    .timeline-step {
+      position: relative;
+      margin-bottom: 28px;
+    }
+    .timeline-step:last-child {
+      margin-bottom: 0;
     }
 
-    h1 {
-      font-size: 3rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 0.75rem;
-      color: #0d0d0d;
-    }
-
-    .tagline {
-      font-size: 1.125rem;
-      font-weight: 500;
-      color: #666;
-      margin-bottom: 1.5rem;
-      max-width: 400px;
-    }
-
-    .description {
-      max-width: 520px;
-      color: #444;
-      margin-bottom: 2.5rem;
-      font-size: 1rem;
-      line-height: 1.75;
-    }
-
-    .cta-group {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 1rem;
-    }
-
-    .app-store-badge {
-      height: 52px;
-      transition: transform 0.2s, opacity 0.2s;
-    }
-    .app-store-badge:hover {
-      transform: scale(1.03);
-      opacity: 0.9;
-    }
-
-    .scroll-hint {
+    .timeline-number {
       position: absolute;
-      bottom: 2rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.15em;
-      color: #ccc;
-    }
-
-    /* Screenshots Section */
-    .screenshots {
-      padding: 6rem 2rem;
-      background: #f8f8f8;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .section-label {
-      font-size: 0.7rem;
+      left: -52px;
+      top: 0;
+      width: 32px;
+      height: 32px;
+      background: #0D0D0D;
+      color: #FAFAFA;
+      font-size: 13px;
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.2em;
-      color: #999;
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: 2rem;
-      font-weight: 700;
-      color: #1a1a1a;
-      letter-spacing: -0.02em;
-    }
-
-    .screenshots-grid {
       display: flex;
-      gap: 1.5rem;
+      align-items: center;
       justify-content: center;
-      flex-wrap: wrap;
-      max-width: 1100px;
-      margin: 0 auto;
+      z-index: 1;
     }
 
-    .screenshot {
-      width: 240px;
-      border-radius: 28px;
-      box-shadow: 0 24px 48px rgba(0,0,0,0.1);
-      transition: transform 0.3s ease;
-    }
-    .screenshot:hover {
-      transform: translateY(-8px);
-    }
-
-    /* Features Section */
-    .features {
-      padding: 6rem 2rem;
-      background: #fff;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 3rem;
-      max-width: 900px;
-      margin: 0 auto;
-    }
-
-    .feature {
-      text-align: left;
-    }
-
-    .feature-number {
-      display: inline-block;
-      width: 28px;
-      height: 28px;
-      background: #1a1a1a;
-      color: #fff;
-      font-size: 0.75rem;
+    .timeline-title {
+      font-size: 12px;
       font-weight: 700;
-      border-radius: 6px;
-      text-align: center;
-      line-height: 28px;
-      margin-bottom: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #0D0D0D;
+      margin-bottom: 4px;
     }
 
-    .feature h3 {
-      font-size: 1.125rem;
-      font-weight: 700;
-      margin-bottom: 0.5rem;
-      color: #1a1a1a;
-    }
-
-    .feature p {
+    .timeline-desc {
+      font-size: 14px;
       color: #666;
-      font-size: 0.95rem;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
-    /* Categories Section */
-    .categories {
-      padding: 6rem 2rem;
-      background: #f8f8f8;
-    }
-
-    .categories-grid {
+    /* ============================================
+       CATEGORY SHOWCASE
+       ============================================ */
+    .showcase-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 1.25rem;
-      max-width: 1000px;
-      margin: 0 auto;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      margin-top: 24px;
     }
 
-    .category-card {
+    .showcase-card {
       background: #fff;
-      border-radius: 12px;
-      padding: 1.25rem;
+      border: 2px solid #0D0D0D;
       display: flex;
-      gap: 1rem;
-      align-items: flex-start;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.04);
-      transition: transform 0.2s, box-shadow 0.2s;
-    }
-    .category-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+      overflow: hidden;
     }
 
-    .category-color {
-      width: 8px;
-      min-height: 100%;
-      border-radius: 4px;
+    .showcase-color {
+      width: 6px;
       flex-shrink: 0;
     }
 
-    .category-content {
+    .showcase-content {
+      padding: 14px 16px;
       flex: 1;
     }
 
-    .category-name {
-      font-size: 0.7rem;
+    .showcase-name {
+      font-size: 9px;
       font-weight: 700;
+      letter-spacing: 1.5px;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
       color: #999;
-      margin-bottom: 0.5rem;
+      margin-bottom: 4px;
     }
 
-    .category-example {
-      font-size: 0.95rem;
+    .showcase-example {
+      font-size: 14px;
       color: #333;
       line-height: 1.5;
     }
 
-    /* Footer */
-    footer {
-      padding: 3rem 2rem;
-      background: #1a1a1a;
-      border-top: 1px solid #333;
+    /* ============================================
+       FINAL CTA
+       ============================================ */
+    .cta-section {
+      background: #0D0D0D;
+      padding: 60px 24px;
+      text-align: center;
     }
 
-    .footer-content {
-      max-width: 600px;
-      margin: 0 auto;
+    .cta-heading {
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #FAFAFA;
+      margin-bottom: 8px;
+    }
+
+    .cta-sub {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 28px;
+    }
+
+    /* ============================================
+       FOOTER
+       ============================================ */
+    footer {
+      padding: 32px 24px;
       text-align: center;
+      border-top: 2px solid #0D0D0D;
+    }
+
+    .footer-brand {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #999;
+      margin-bottom: 16px;
     }
 
     .footer-links {
       display: flex;
-      gap: 2rem;
+      gap: 24px;
       justify-content: center;
-      font-size: 0.8rem;
-      margin-bottom: 1.5rem;
+      margin-bottom: 16px;
     }
 
     .footer-links a {
-      color: #888;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
       text-decoration: none;
-      transition: color 0.2s;
     }
     .footer-links a:hover {
-      color: #fff;
+      color: #0D0D0D;
     }
 
-    .footer-contact {
-      font-size: 0.8rem;
-      color: #555;
-    }
-    .footer-contact a {
-      color: #777;
-      text-decoration: none;
-    }
-    .footer-contact a:hover {
-      color: #fff;
+    .footer-copyright {
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #BFBFBF;
     }
 
-    /* Responsive */
-    @media (max-width: 768px) {
-      h1 { font-size: 2.25rem; }
-      .section-title { font-size: 1.5rem; }
-      .screenshot { width: 180px; border-radius: 20px; }
-      .features-grid { gap: 2rem; }
-      .categories-grid { gap: 1rem; }
+    /* ============================================
+       RESPONSIVE
+       ============================================ */
+    @media (min-width: 640px) {
+      .category-grid {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .showcase-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .screenshot-frame img {
+        width: 180px;
+      }
     }
 
     @media (max-width: 480px) {
-      .screenshot { width: 150px; border-radius: 16px; }
-      .screenshots-grid { gap: 1rem; }
-      .category-card { padding: 1rem; }
-      .category-example { font-size: 0.9rem; }
+      .hero-logo {
+        font-size: 24px;
+        letter-spacing: 5px;
+      }
+      .hero-description {
+        font-size: 15px;
+      }
+      .section {
+        padding: 48px 0;
+      }
+      .section-heading {
+        font-size: 20px;
+      }
+      .screenshots-row {
+        gap: 10px;
+      }
+      .screenshot-frame img {
+        width: 130px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .screenshot-frame img {
+        width: 110px;
+      }
+      .category-tile-face {
+        width: 48px;
+        height: 48px;
+        font-size: 18px;
+      }
+      .category-tile-shadow {
+        width: 48px;
+        height: 48px;
+      }
     }
   </style>
 </head>
 <body>
-  <!-- Hero -->
-  <section class="hero">
-    <img src="logo.png" alt="RMind" class="logo">
-    <h1>RMind</h1>
-    <p class="tagline">Quick notes so you don't forget.</p>
-    <p class="description">
-      Capture brilliant ideas, interesting people, and must-visit places in seconds.
-      Color-coded categories, a map of your places, and reminders that disappear when you're done.
-    </p>
-    <div class="cta-group">
-      <a href="https://apps.apple.com/app/rmind-dont-forget/id6756280913" target="_blank" rel="noopener noreferrer">
-        <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us" alt="Download on the App Store" class="app-store-badge">
-      </a>
+
+  <!-- Bauhaus Color Bar -->
+  <div class="bauhaus-bar">
+    <span></span><span></span><span></span>
+  </div>
+
+  <!-- Sticky Nav -->
+  <nav class="sticky-nav" id="stickyNav">
+    <div class="sticky-nav-inner">
+      <a href="#" class="sticky-nav-logo">RMind</a>
+      <a href="https://apps.apple.com/us/app/rmind-dont-forget/id6756280913" target="_blank" rel="noopener" class="btn-small">Download</a>
     </div>
-    <span class="scroll-hint">Scroll to explore</span>
+  </nav>
+
+  <!-- Hero -->
+  <section class="hero" id="hero">
+    <div class="hero-icon-wrapper">
+      <div class="hero-icon-shadow"></div>
+      <img src="logo.png" alt="RMind app icon" class="hero-icon">
+    </div>
+    <h1 class="hero-logo">RMind</h1>
+    <p class="hero-tagline">Don't Forget.</p>
+    <p class="hero-description">
+      Capture memories, ideas, places, people, and more. Recall them instantly. Share with friends.
+    </p>
+    <div class="hero-cta">
+      <a href="https://apps.apple.com/us/app/rmind-dont-forget/id6756280913" target="_blank" rel="noopener" class="btn btn-primary">Download on the App Store</a>
+    </div>
+    <p class="hero-subtext">Free on iOS 16.6+</p>
+    <span class="hero-scroll">Scroll to explore</span>
   </section>
 
   <!-- Screenshots -->
-  <section class="screenshots">
-    <div class="section-header">
+  <section class="section section-alt" id="screenshots">
+    <div class="container">
       <p class="section-label">See it in action</p>
-      <h2 class="section-title">Designed to get out of your way</h2>
+      <h2 class="section-heading">Designed to get out of your way</h2>
+      <div class="screenshots-row">
+        <div class="screenshot-frame">
+          <div class="screenshot-shadow"></div>
+          <img src="screenshots/capture.png" alt="Capture screen">
+        </div>
+        <div class="screenshot-frame">
+          <div class="screenshot-shadow"></div>
+          <img src="screenshots/home.png" alt="Recall screen">
+        </div>
+        <div class="screenshot-frame">
+          <div class="screenshot-shadow"></div>
+          <img src="screenshots/map.png" alt="Map view">
+        </div>
+        <div class="screenshot-frame">
+          <div class="screenshot-shadow"></div>
+          <img src="screenshots/widget.png" alt="Home screen widget">
+        </div>
+      </div>
     </div>
-    <div class="screenshots-grid">
-      <img src="screenshots/capture.png" alt="Capture" class="screenshot">
-      <img src="screenshots/home.png" alt="Recall" class="screenshot">
-      <img src="screenshots/map.png" alt="Map" class="screenshot">
-      <img src="screenshots/widget.png" alt="Widget" class="screenshot">
+  </section>
+
+  <!-- Category Grid -->
+  <section class="section" id="categories">
+    <div class="container">
+      <p class="section-label">Remember everything</p>
+      <h2 class="section-heading">12 Smart Categories</h2>
+      <p class="body-text" style="margin-bottom: 8px;">Every category has tailored fields. Star ratings for restaurants, authors for books, prices for purchases.</p>
+
+      <div class="category-grid">
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #0D5ECC;">&#x1F64B;</div>
+          </div>
+          <div class="category-tile-label">Person</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #1E9954;">&#x1F4CD;</div>
+          </div>
+          <div class="category-tile-label">Place</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #F57D05;">&#x1F37D;&#xFE0F;</div>
+          </div>
+          <div class="category-tile-label">Restaurant</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #9933CC;">&#x1F6D2;</div>
+          </div>
+          <div class="category-tile-label">Purchase</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #F5C703;">&#x1F4D6;</div>
+          </div>
+          <div class="category-tile-label">Book</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #E02E4D;">&#x1F3AC;</div>
+          </div>
+          <div class="category-tile-label">Movie</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #148577;">&#x1F4A1;</div>
+          </div>
+          <div class="category-tile-label">Idea</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #5533E0;">&#x1F4C5;</div>
+          </div>
+          <div class="category-tile-label">Event</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #E02E8F;">&#x1F381;</div>
+          </div>
+          <div class="category-tile-label">Gift</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #1294CC;">&#x23F0;</div>
+          </div>
+          <div class="category-tile-label">Reminder</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #E05945;">&#x1F4DD;</div>
+          </div>
+          <div class="category-tile-label">List</div>
+        </div>
+        <div class="category-tile">
+          <div class="category-tile-icon">
+            <div class="category-tile-shadow"></div>
+            <div class="category-tile-face" style="background: #F0F0F0;">&#x1F4CC;</div>
+          </div>
+          <div class="category-tile-label">Other</div>
+        </div>
+      </div>
+
+      <div class="field-chips">
+        <span class="field-chip">By Author</span>
+        <span class="field-chip">&#9733; Rating</span>
+        <span class="field-chip">Price</span>
+        <span class="field-chip">For Recipient</span>
+        <span class="field-chip">Event Date</span>
+        <span class="field-chip">Relationship</span>
+      </div>
     </div>
   </section>
 
   <!-- Features -->
-  <section class="features">
-    <div class="section-header">
+  <section class="section section-alt" id="features">
+    <div class="container">
       <p class="section-label">Features</p>
-      <h2 class="section-title">Everything you need, nothing you don't</h2>
-    </div>
-    <div class="features-grid">
-      <div class="feature">
-        <span class="feature-number">1</span>
-        <h3>Instant capture</h3>
-        <p>Open, type, done. Home screen widgets let you save a thought without even opening the app.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-number">2</span>
-        <h3>Places on a map</h3>
-        <p>See everywhere you've been. Tap any pin for details, then get directions in Apple or Google Maps.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-number">3</span>
-        <h3>Reminders that disappear</h3>
-        <p>Set a reminder, get notified, dismiss when done. No clutter, no lingering tasks.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-number">4</span>
-        <h3>Tags & search</h3>
-        <p>Add #hashtags to organize your way. Find anything instantly with powerful search and filters.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-number">5</span>
-        <h3>Secure sync</h3>
-        <p>Sign in with Apple, Google, or email. Your data syncs privately across all your devices.</p>
-      </div>
-      <div class="feature">
-        <span class="feature-number">6</span>
-        <h3>11 categories</h3>
-        <p>People, places, restaurants, ideas, books, movies, events, gifts, reminders, and more.</p>
+      <h2 class="section-heading">What You Can Do</h2>
+
+      <div class="features-list">
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #1E9954;">
+            <span class="feature-card-bar-emoji">&#x270F;&#xFE0F;</span>
+            <span class="feature-card-bar-label">Capture</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Capture Anything</div>
+            <p class="feature-card-desc">Tap a category, fill in the details, done. Add photos, locations, #hashtags, and notes to any entry.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #E05945;">
+            <span class="feature-card-bar-emoji">&#x1F4DD;</span>
+            <span class="feature-card-bar-label">Lists</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Lists &amp; Checklists<span class="feature-card-new">New</span></div>
+            <p class="feature-card-desc">Create grocery lists, packing lists, or any to-do. Check items off, reorder by dragging, and track progress with a visual bar.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #1294CC;">
+            <span class="feature-card-bar-emoji">&#x23F0;</span>
+            <span class="feature-card-bar-label">Reminders</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Smart Reminders</div>
+            <p class="feature-card-desc">Set reminders on any entry. Repeat daily, weekly, monthly, or weekdays. Snooze with one swipe.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #0D5ECC;">
+            <span class="feature-card-bar-emoji">&#x1F465;</span>
+            <span class="feature-card-bar-label">Social</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Friends &amp; Sharing<span class="feature-card-new">New</span></div>
+            <p class="feature-card-desc">Add friends by email or invite code. Share entries like restaurant picks, shopping lists, or travel plans. They get their own copy to keep.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #148577;">
+            <span class="feature-card-bar-emoji">&#x1F5FA;&#xFE0F;</span>
+            <span class="feature-card-bar-label">Map</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Map View</div>
+            <p class="feature-card-desc">Every entry with a location appears on the map. Find that restaurant, that shop, that place you saved.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #9933CC;">
+            <span class="feature-card-bar-emoji">&#x2728;</span>
+            <span class="feature-card-bar-label">Fields</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Smart Fields<span class="feature-card-new">New</span></div>
+            <p class="feature-card-desc">Each category has tailored fields. Author for books, star ratings for restaurants, price for purchases, event dates, and more.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #5533E0;">
+            <span class="feature-card-bar-emoji">&#x1F4F1;</span>
+            <span class="feature-card-bar-label">Widgets</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Home Screen Widgets</div>
+            <p class="feature-card-desc">Small, medium, and large widgets. Capture a thought without even opening the app.</p>
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-card-bar" style="background: #E02E4D;">
+            <span class="feature-card-bar-emoji">&#x1F50D;</span>
+            <span class="feature-card-bar-label">Search</span>
+          </div>
+          <div class="feature-card-body">
+            <div class="feature-card-title">Search &amp; Filter</div>
+            <p class="feature-card-desc">Filter by category, #hashtag, or reminders. Find anything instantly with powerful search.</p>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Categories -->
-  <section class="categories">
-    <div class="section-header">
+  <!-- How It Works -->
+  <section class="section" id="how-it-works">
+    <div class="container">
+      <p class="section-label">Getting started</p>
+      <h2 class="section-heading">How It Works</h2>
+
+      <div class="timeline">
+        <div class="timeline-step">
+          <div class="timeline-number">1</div>
+          <div class="timeline-title">Download</div>
+          <p class="timeline-desc">Get RMind free from the App Store. Sign in with Apple, Google, or email.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">2</div>
+          <div class="timeline-title">Capture</div>
+          <p class="timeline-desc">Tap a category, add a title and details, save. Add photos or a location if you want.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">3</div>
+          <div class="timeline-title">Organize</div>
+          <p class="timeline-desc">Use categories and #hashtags. Everything sorts itself.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">4</div>
+          <div class="timeline-title">Recall</div>
+          <p class="timeline-desc">Search, filter, or browse the map. Everything you saved is instantly findable.</p>
+        </div>
+        <div class="timeline-step">
+          <div class="timeline-number">5</div>
+          <div class="timeline-title">Share</div>
+          <p class="timeline-desc">Add friends and share any entry as a copy. Or create a share link anyone can use.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Category Showcase -->
+  <section class="section section-alt" id="showcase">
+    <div class="container">
       <p class="section-label">What will you remember?</p>
-      <h2 class="section-title">A category for every moment</h2>
+      <h2 class="section-heading">A Category for Every Moment</h2>
+
+      <div class="showcase-grid">
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #0D5ECC;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Person</p>
+            <p class="showcase-example">Met Sarah at the conference &mdash; works at Google, interested in AI, loves hiking</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #1E9954;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Place</p>
+            <p class="showcase-example">Hidden beach cove off Highway 1 &mdash; park at mile marker 42, short trail down</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #F57D05;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Restaurant</p>
+            <p class="showcase-example">Destroyer in Culver City &mdash; incredible coffee, try the seasonal toast</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #9933CC;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Purchase</p>
+            <p class="showcase-example">Allbirds Tree Runners &mdash; size 10, grey, most comfortable shoes I've owned</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #F5C703;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Book</p>
+            <p class="showcase-example">Thinking, Fast and Slow &mdash; recommended on that podcast, about decision making</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #E02E4D;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Movie</p>
+            <p class="showcase-example">Fallout Season 2 on Prime &mdash; post-apocalyptic vibes, Walton Goggins is amazing</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #148577;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Idea</p>
+            <p class="showcase-example">App that tracks water intake with plant growth visualization &mdash; gamifies hydration</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #5533E0;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Event</p>
+            <p class="showcase-example">Nine Inch Nails at Honda Center &mdash; March 10, buy tickets when they drop Friday</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #E02E8F;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Gift</p>
+            <p class="showcase-example">Mom wants a KitchenAid mixer &mdash; red, artisan series, check Costco first</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #1294CC;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Reminder</p>
+            <p class="showcase-example">Call dentist to reschedule cleaning &mdash; they close at 5pm</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #E05945;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">List</p>
+            <p class="showcase-example">Camping trip packing &mdash; tent, sleeping bags, cooler, firewood, matches, lantern</p>
+          </div>
+        </div>
+        <div class="showcase-card">
+          <div class="showcase-color" style="background: #F0F0F0;"></div>
+          <div class="showcase-content">
+            <p class="showcase-name">Other</p>
+            <p class="showcase-example">WiFi password at the Airbnb &mdash; network: CoastalRetreat, pass: sunshine2024!</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="categories-grid">
-      <div class="category-card">
-        <div class="category-color" style="background: #4A90D9;"></div>
-        <div class="category-content">
-          <p class="category-name">Person</p>
-          <p class="category-example">Met Sarah at the conference — works at Google, interested in AI, loves hiking</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #2ECC71;"></div>
-        <div class="category-content">
-          <p class="category-name">Place</p>
-          <p class="category-example">Hidden beach cove off Highway 1 — park at mile marker 42, short trail down</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #F39C12;"></div>
-        <div class="category-content">
-          <p class="category-name">Eats & Drinks</p>
-          <p class="category-example">Destroyer in Culver City — incredible coffee, try the seasonal toast</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #9B59B6;"></div>
-        <div class="category-content">
-          <p class="category-name">Purchase</p>
-          <p class="category-example">Allbirds Tree Runners — size 10, grey, most comfortable shoes I've owned</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #F1C40F;"></div>
-        <div class="category-content">
-          <p class="category-name">Book</p>
-          <p class="category-example">Thinking, Fast and Slow — recommended on that podcast, about decision making</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #E74C3C;"></div>
-        <div class="category-content">
-          <p class="category-name">Movie / Show</p>
-          <p class="category-example">Fallout Season 2 on Prime — post-apocalyptic vibes, Walton Goggins is amazing</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #1ABC9C;"></div>
-        <div class="category-content">
-          <p class="category-name">Idea</p>
-          <p class="category-example">App that tracks water intake with plant growth visualization — gamifies hydration</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #8E44AD;"></div>
-        <div class="category-content">
-          <p class="category-name">Event</p>
-          <p class="category-example">Nine Inch Nails at Honda Center — March 10, buy tickets when they drop Friday</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #E91E8B;"></div>
-        <div class="category-content">
-          <p class="category-name">Gift Idea</p>
-          <p class="category-example">Mom wants a KitchenAid mixer — red, artisan series, check Costco first</p>
-        </div>
-      </div>
-      <div class="category-card">
-        <div class="category-color" style="background: #7F8C8D;"></div>
-        <div class="category-content">
-          <p class="category-name">Reminder</p>
-          <p class="category-example">Call dentist to reschedule cleaning — they close at 5pm</p>
-        </div>
-      </div>
-    </div>
+  </section>
+
+  <!-- Final CTA -->
+  <section class="cta-section">
+    <h2 class="cta-heading">Don't Forget.</h2>
+    <p class="cta-sub">Download RMind</p>
+    <a href="https://apps.apple.com/us/app/rmind-dont-forget/id6756280913" target="_blank" rel="noopener" class="btn btn-inverted">Get it on the App Store</a>
   </section>
 
   <!-- Footer -->
   <footer>
-    <div class="footer-content">
-      <div class="footer-links">
-        <a href="privacy.html">Privacy</a>
-        <a href="terms.html">Terms</a>
-      </div>
-      <p class="footer-contact">
-        Questions? <a href="mailto:contact@rmind.app">contact@rmind.app</a>
-      </p>
+    <p class="footer-brand">RMind &mdash; Remember Everything</p>
+    <div class="footer-links">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="mailto:contact@rmind.app">Contact</a>
     </div>
+    <p class="footer-copyright">&copy; 2025 Zirimiri LLC</p>
   </footer>
+
+  <script>
+    // Sticky nav — show when hero exits viewport
+    const hero = document.getElementById('hero');
+    const nav = document.getElementById('stickyNav');
+
+    const heroObserver = new IntersectionObserver(([entry]) => {
+      nav.classList.toggle('visible', !entry.isIntersecting);
+    }, { threshold: 0 });
+
+    heroObserver.observe(hero);
+
+    // Scroll-triggered fade-in on sections
+    const sections = document.querySelectorAll('.section');
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    sections.forEach(section => sectionObserver.observe(section));
+  </script>
 </body>
 </html>

@@ -7,7 +7,7 @@
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', Arial, sans-serif;
       line-height: 1.6;
       color: #0d0d0d;
       background: #fafafa;
@@ -15,9 +15,34 @@
       max-width: 800px;
       margin: 0 auto;
     }
+    .bauhaus-bar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 6px;
+      display: flex;
+      z-index: 1000;
+    }
+    .bauhaus-bar span { flex: 1; }
+    .bauhaus-bar span:nth-child(1) { background: #E02E4D; }
+    .bauhaus-bar span:nth-child(2) { background: #F5C703; }
+    .bauhaus-bar span:nth-child(3) { background: #0D5ECC; }
+    .back-link {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #666;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      margin-top: 1rem;
+    }
+    .back-link:hover { color: #0d0d0d; }
     h1 {
       font-size: 2rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: -0.02em;
       margin-bottom: 0.5rem;
@@ -48,8 +73,12 @@
   </style>
 </head>
 <body>
+  <div class="bauhaus-bar"><span></span><span></span><span></span></div>
+
+  <a href="/" class="back-link">&larr; Back to RMind</a>
+
   <h1>Terms of Service</h1>
-  <p class="updated">Last updated: December 2024</p>
+  <p class="updated">Last updated: February 2025</p>
 
   <p>Welcome to RMind. By using our application, you agree to these Terms of Service.</p>
 
@@ -62,6 +91,16 @@
   <h2>Your Content</h2>
   <p>You retain ownership of all content you create in RMind. You are responsible for ensuring your content does not violate any laws or third-party rights.</p>
 
+  <h2>Sharing &amp; Social Features</h2>
+  <p>RMind allows you to connect with friends and share entries. When using these features:</p>
+  <ul>
+    <li>Shared entries create independent copies for recipients. Once shared, the recipient has their own version.</li>
+    <li>Share links expire after 7 days and can be deactivated at any time by the creator.</li>
+    <li>You are responsible for the content you share with others.</li>
+    <li>Friend connections are mutual and require acceptance by both parties.</li>
+    <li>You may remove friend connections at any time, which does not affect previously shared entries.</li>
+  </ul>
+
   <h2>Acceptable Use</h2>
   <p>You agree not to:</p>
   <ul>
@@ -69,6 +108,7 @@
     <li>Attempt to gain unauthorized access to the service</li>
     <li>Interfere with the proper functioning of the service</li>
     <li>Upload malicious content or code</li>
+    <li>Use sharing features to distribute harmful, abusive, or illegal content</li>
   </ul>
 
   <h2>Service Availability</h2>
